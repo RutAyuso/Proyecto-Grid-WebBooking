@@ -1,0 +1,1170 @@
+/* VELORES INCIALES */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+  font-size: 62.5%;
+
+  /* COLORES*/
+  --color-primary: #730039; /*PRINCIPAL BURDEOS*/
+  --color-primary-m-light: hsla(330, 100%, 23%, 0.55);/*CLARO*/
+  --color-primary-m-dark: hsla(330, 100%, 23%, 0.85);/*OSCURO*/
+
+  --color-secondary: #ffc513;/*SECUNDARIO AMARILLO*/
+  --color-secondary-m-light: hsla(45, 100%, 54%, 0.55);/*CLARO*/
+  --color-secondary-m-dark: rgba(255, 196, 19, 0.85);/*OSCURO*/
+
+  --color-tertiary: #ff724c;/*TERCIARIO SALMON*/
+  --color-tertiary-m-light: hsla(13, 100%, 65%, 0.55);/*CLARO*/
+  --color-tertiary-m-dark: rgba(255, 155, 76, 0.85);/*OSCURO*/
+
+  --color-quaternary: #f6eedf;/*CUATERNARIO*/
+  --color-quaternary-m-light: hsla(39, 56%, 92%, 0.55);/*CLARO*/
+  --color-quaternary-m-dark: hsla(39, 56%, 92%, 0.85);/*OSCURO*/
+
+  /* DURACION TRANSICION */
+  --transition-duration: 0.3s;
+
+  /* TAMAÑO DE LETRA PARA TITULOS */
+  --font-size-title: calc(2rem + 2vw);
+
+  /* PADDING DE HEADING*/
+  --padding-section: 8vh 3vw;
+}
+
+/*AL BODY LE PONEMOS LA FUENTE DE GOOGLE, TAMAÑO Y COLOR DE FONDO*/
+body {
+  font-family: "Titillium Web", sans-serif;
+  line-height: 1.7;
+  background-color: var(--color-quaternary);
+}
+/*CONTENEDOR GRID DECLARADO*/
+.container {
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-columns:/*COLUMNAS*/
+    [container-start] 1fr [center-start]
+    repeat(10, [col-start] minmax(min-content, 11rem) [col-end])
+    [center-end] 1fr [container-end];
+  grid-template-rows: 100vh repeat(8, min-content);/*FILAS*/
+}
+.container > * {
+  font-size: 2rem;
+}
+
+/* ENLACES VISITADOS/NO VISITADOS*/
+a:link,
+a:visited {
+  color: var(--color-quaternary);
+  text-decoration: none;
+  font-size: calc(0.5rem + 1vw);
+  padding: 1rem 2rem;
+  border-radius: 0.3rem;
+  position: relative;
+  transition: all var(--transition-duration) cubic-bezier(1, 0, 0, 1);
+  z-index: 1;
+}
+
+/* ESTILOS PARRAFOS*/
+p {
+  color: white;
+  font-size: calc(1rem + 1vw);
+  font-weight: 300;
+}
+/*ESTILOS ELEMENTOS DE LISTA SIN CIRCULITO */
+li {
+  list-style: none;
+  margin-bottom: 4rem;
+}
+/* ICONOS TAMAÑO Y COLOR */
+i {
+  font-size: var(--font-size-title);
+  color: var(--color-secondary);
+}
+
+
+
+
+
+
+
+
+/*ESTILOS DEL MAIN...*/
+
+
+/*SECCION HEADER*/
+header#header {
+  grid-column: container-start / container-end;
+  background: linear-gradient(
+      var(--color-primary-m-light),
+      var(--color-primary-m-light)
+    ),
+    url("img/hero.jpg");
+  /*COBERTURA Y REPETICION DE LA IMAGEN, MEJOR VISIBILIDAD/*/
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/*MENU ---- NAVEGACION*/
+/*MENU PRINCIPAL POSICION*/
+.header__main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 6;
+}
+.header__main-nav input[type="checkbox"] {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  height: 5rem;
+  width: 5rem;
+  opacity: 0;
+  cursor: pointer;/*CURSOR*/
+  z-index: 3;
+}
+
+
+
+/* MENU HAMBURGUESA*/
+.header__main-nav--hamburger {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  height: 5rem;
+  width: 5rem;
+  padding: 1rem;
+  background-color: var(--color-secondary);/*COLOR FONDO*/
+  z-index: 2;
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  place-items: center;
+
+  animation: main-nav 2s;/*ANIMACION GIRO*/
+}
+
+@keyframes main-nav {/*ANIMACION HAMBURGUESA*/
+  0% {
+    transform: translateX(150rem) rotate(1800deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+  }
+}
+
+/*RAYAS DEL MENU HAMBURGUESA*/
+.header__main-nav--hamburger > div {
+  position: relative;
+  height: 0.3rem;
+  width: 100%;
+  background-color: var(--color-tertiary);/*COLOR FONDO*/
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  place-items: center;
+  transition: all var(--transition-duration) ease-in-out;/*TRANSICION LINEAS*/
+}
+/* RAYAS MENU HAMBURGUESA ANIMACION*/
+.header__main-nav--hamburger > div::before,
+.header__main-nav--hamburger > div::after {
+  content: "";
+  position: absolute;
+  top: -1rem;
+  width: 60%;
+  height: inherit;
+  background-color: inherit;
+  z-index: 2;
+}
+.header__main-nav--hamburger > div::before {
+  left: 0;/*RAYA ALINEADA A LA IZQUIERDA*/
+}
+.header__main-nav--hamburger > div::after {
+  top: 1rem;
+  right: 0;/*RAYA ALINEADA A LA DERECHA*/
+}
+/*MENU GIRATORIO*/
+.header__main-nav
+  input[type="checkbox"]:checked
+  + .header__main-nav--hamburger
+  > div {
+  transform: rotate(135deg);/*ESTÁ DAMOS CHECKED GIRA 135*/
+}
+.header__main-nav
+  input[type="checkbox"]:checked
+  + .header__main-nav--hamburger
+  > div::before {/*PRIMERA LINEA*/
+  left: 0;
+  top: 0;
+  width: 100%;/*CAMBIA EL ANCHO*/
+  transform: rotate(270deg);/*CHECKED GIRA 270 */
+}
+.header__main-nav
+  input[type="checkbox"]:checked
+  + .header__main-nav--hamburger
+  > div::after {/*TERCERA LINEA*/
+  opacity: 0;/*SI ESTÁ CHECKED SE PONDRÁ TRANSPARENTE/DESAPARECE*/
+}
+.header__main-nav
+  input[type="checkbox"]:checked:hover
+  + .header__main-nav--hamburger
+  > div {
+  transform: rotate(405deg);/*SI ESTÁ CHECKED (MENU ABIERTO) Y HECES HOVER HARÁ GIRO AL LADO CONTRARIO*/
+}
+
+/* MENU LINKS ALINEADOS EN COLUMNA */
+.header__main-nav--menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;/*OCUPA EL 100% DE LA VISTA*/
+  width: 100%;
+  visibility: hidden;
+  overflow: hidden;
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  place-items: center;
+}
+.header__main-nav--menu > div {
+  background-color: var(--color-secondary-m-dark);
+  height: 200%;
+  width: 200%;
+
+  display: grid;/*CREAMOS CONTENEDOR GRID*/
+  place-items: center;
+
+  transform: scaleX(0);
+  transition: all 0.5s ease-in-out;
+}
+.header__main-nav--menu > div > div {
+  text-align: center;
+  max-width: 90vw;
+  max-height: 100vh;
+  opacity: 0;                         /*OPACIDAD 0*/
+  transition: opacity 0.5s ease-in-out;
+}
+/* MOVIMIENTO MENU CUNADO ESTÁ CHECKED*/
+.header__main-nav input[type="checkbox"]:checked ~ .header__main-nav--menu {
+  visibility: visible;
+}
+/*CHECKE = MENU CRECE HACIA LOS LADOS*/
+.header__main-nav
+  input[type="checkbox"]:checked
+  ~ .header__main-nav--menu
+  > div {
+  transform: scaleX(1);
+}
+/*OPACIDAD COLOR INCREMENTADA CUANDO CHECKED*/
+.header__main-nav
+  input[type="checkbox"]:checked
+  ~ .header__main-nav--menu
+  > div
+  > div {
+  opacity: 1;
+}
+/*MENU LINKS*/
+.header__main-nav--menu ul li a:link,
+.header__main-nav--menu ul li a:visited {
+  z-index: 5;
+  font-size: calc(1.5rem + 0.5vw);
+}
+/*TRANSICION HOVER LINK MENU NAVEGACION*/
+.header__main-nav--menu ul li a:link::before,
+.header__main-nav--menu ul li a:visited::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  transform: scaleY(0);
+  background-color: var(--color-primary-m-dark);/*BURDEOS*/
+  transition: transform var(--transition-duration) ease-in-out;/*DURACION PREDISEÑADA*/
+}
+.header__main-nav--menu ul li a:active::before,
+.header__main-nav--menu ul li a:hover::before {
+  transform: scaleY(1);/*HOVER = CRECE */
+}
+
+
+
+
+
+/*LOGO DISPOSICION DE LOS ELEMENTOS*/
+.header__logo__content {
+  display: grid;/*DECLARAMOS CONTENEDOR*/
+  grid-template-columns: 1fr minmax(30rem, 1fr) 1fr;
+  grid-template-rows: min-content;
+  height: 90%;
+  justify-items: center;
+}
+/*TODO EL HEADER/LOGO Y CONTENIDO*/
+.header__logo__content--logo {
+  grid-column: 2/3;
+  letter-spacing: 0.2rem;
+}
+/*LETRAS DEL LOGO vlv*/
+.header__logo__content--logo span {
+  color: var(--color-tertiary);
+  font-size: 3rem;
+  font-family: "Times New Roman", Times, serif;/*PARA LAS LETRAS vlv DEL LOGO SE LE APLICA TIMES NEW ROMAN*/
+}
+.header__logo__content--content {/*ALINEACION DEL CONTENIDO DEL LOGO ("RELAX....")*/
+  grid-column: 1/-1;
+  align-self: center;
+}
+/*TITULO*/
+.header__logo__content--content__title {
+  font-size: calc(4rem + 4vw);
+  font-weight: 300;
+  color: white;
+  text-transform: uppercase;
+  padding: 0 2rem 0 var(--font-size-title);/*PONEMOS FUENTE DEL TITULO*/
+}
+/*PARRAFO LOGO*/
+.header__logo__content--content__para {
+  font-size: calc(1rem + 2vw);
+  font-weight: 500;
+  padding: 2vh 2rem 6vh var(--font-size-title);/*PONEMOS FUENTE DEL TITULO*/
+}
+
+/*ANIMACION BOTON DISCOVER MORE CRECE A LOS LADOS*/
+.header__logo__content--content__link:link,
+.header__logo__content--content__link:visited {
+  margin-left: var(--font-size-title);/*PONEMOS FUENTE DEL TITULO*/
+  border: 0.2rem solid var(--color-tertiary);/*COLOR SALMON*/
+}
+.header__logo__content--content__link:link::before,
+.header__logo__content--content__link:visited::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--color-tertiary);
+  transform: scaleX(0);
+  transition: transform 0.45s cubic-bezier(1, 0, 0, 1);/*ANIMACION*/
+  z-index: -1;
+}
+.header__logo__content--content__link:hover::before,
+.header__logo__content--content__link:active::before {
+  transform: scaleX(1);
+}
+
+
+
+
+
+
+/* CONTENIDO DE LA SECCION BOOKING */
+section#booking-content {
+  grid-column: center-start / col-end 6;
+  padding: var(--padding-section);
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-rows: repeat(3, max-content);
+  grid-gap: 2vh;
+}
+/*BOOKING CONFIGURACION TITULO*/
+.booking-content__title {
+  font-size: var(--font-size-title);/*PONEMOS FUENTE DEL TITULO*/
+  padding: 0 2rem 1rem;
+  font-weight: 300;
+  position: relative;
+}
+.booking-content__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  height: 0.2rem;
+  width: 30%;
+  background-color: var(--color-secondary);
+}
+/*BOOKING CONFIGURACION PARARFO PADDING*/
+.booking-content__para {
+  padding: 2rem;
+}
+/*BOOKING CONTENIDO COLOR*/
+section#booking-content p,
+.booking-date__contact p {
+  color: var(--color-primary);
+}
+/*BOOKING ICONOS*/
+.booking-content__icons {
+  margin-left: 2rem;
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-columns: repeat(2, 1fr);/*GENERAMOS COLUMNAS*/
+}
+/*BOOKING ICONOS POSICION*/
+.booking-content__icons--weather,
+.booking-content__icons--time {
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-columns: 1fr 2fr;/*COLUMN*/
+  grid-template-rows: 10vh;/*FILAS*/
+  justify-items: start;
+  align-items: center;
+}
+
+/* BOOKING SECCION FECHA*/
+section#booking-date {
+  grid-column: col-start 7 / center-end;/*COL*/
+  padding: var(--padding-section);/*PADDING PREDISEÑADO*/
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-rows: repeat(2, 1fr);/*FILAS*/
+}
+/*CALENDARIO*/
+.booking-date__schedule {
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-columns: repeat(3, 1fr);/*COL*/
+  grid-column-gap: 2vw;/*ESPACIADO*/
+  place-items: center;
+}
+
+.booking-date__schedule--arrival,
+.booking-date__schedule--departure,
+.booking-date__schedule--guests {
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-row-gap: 3vh;/*ESPACIO FILAS*/
+}
+.booking-date__schedule--arrival h5,
+.booking-date__schedule--departure h5,
+.booking-date__schedule--guests h5 {
+  font-size: calc(1rem + 1vw);/*TAMAÑO LETRA*/
+  text-align: center;
+}
+.booking-date__schedule--arrival > div,
+.booking-date__schedule--departure > div,
+.booking-date__schedule--guests > div {
+  background-color: var(--color-secondary);/*COLOR FONDO*/
+  padding: 2rem 4rem;
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-rows: repeat(3, 1fr);
+  place-items: center;
+  position: relative;
+}
+.booking-date__schedule--arrival > div::before,
+.booking-date__schedule--departure > div::before,
+.booking-date__schedule--guests > div::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  border-width: 1.5rem;
+  border-style: solid;
+  border-color: transparent transparent var(--color-secondary) transparent;/*COLOR*/
+  margin-left: -1.5rem;
+}
+.booking-date__schedule--arrival > div p:nth-of-type(2),
+.booking-date__schedule--departure > div p:nth-of-type(2),
+.booking-date__schedule--guests > div p:nth-of-type(2) {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+/*CONTACTO*/
+.booking-date__contact {
+  align-self: end;
+}
+.booking-date__contact--link {
+  background-color: var(--color-secondary);
+  color: white;
+  transition: all var(--transition-duration) ease-in-out;
+}
+.booking-date__contact--link:hover,
+.booking-date__contact--link:active {
+  color: var(--color-secondary);
+  background-color: white;
+  border: 0.1rem solid var(--color-secondary);
+}
+.booking-date__contact p:first-of-type {
+  margin-top: 4rem;
+}
+.booking-date__contact p:nth-of-type(1),
+.booking-date__contact p:nth-of-type(2),
+.booking-date__contact p:nth-of-type(3) {
+  font-size: 2rem;
+}
+
+
+
+
+
+/*SECCION VILLAS*/
+section#villas {
+  grid-column: container-start / container-end;/*COL*/
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-columns: repeat(auto-fit, minmax(47rem, 1fr));/*COL*/
+  grid-gap: 2rem;/*ESPACIADO*/
+}
+div[class^="villas"] {/*CLASES QUE EMPIEZAN POR VILLAS*/
+  padding: 2rem;
+  /*COBERTURA Y REPETICION DE LA IMAGEN, MEJOR VISIBILIDAD/*/
+  background-position: center;
+  background-size: cover;
+  transition: transform var(--transition-duration) ease-in-out;/*DURACION PREDISEÑADA*/
+}
+div[class^="villas"]:hover,
+div[class^="villas"]:active {
+  transform: scale(1.05);/* ANIMACION CRECE*/
+}
+div[class^="villas"] h2[class^="villas"] {
+  font-size: var(--font-size-title);/*PONEMOS FUENTE DEL TITULO*/
+  padding: 0 2rem 1rem 0;
+  font-weight: 400;
+  color: white;
+  text-transform: uppercase;/*MAYUS*/
+}
+div[class^="villas"] p[class^="villas"] {
+  font-size: 2rem;
+  margin: 1.5rem 0 4rem 0;
+  color: white;
+  font-weight: 400;
+}
+div[class^="villas"] a[class^="villas"]:link,
+div[class^="villas"] a[class^="villas"]:visited {
+  display: inline-block;
+  margin-bottom: 2rem;
+  background-color: white;
+  color: var(--color-primary);/*LETRA BURDEOS*/
+  z-index: 2;
+  overflow: hidden;
+}
+div[class^="villas"] a[class^="villas"]:hover,
+div[class^="villas"] a[class^="villas"]:active {
+  color: white;
+}
+div[class^="villas"] a[class^="villas"]:link::before,
+div[class^="villas"] a[class^="villas"]:visited::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 0%;
+  width: 100%;
+  z-index: -1;
+  background-color: var(--color-secondary);/*POSAR RATON CAMBIA AMARILLO*/
+  transition: height var(--transition-duration) ease-in-out;/*TRANSICION PREDISEÑADA*/
+}
+div[class^="villas"]:nth-child(n) a[class^="villas"]:link::before,
+div[class^="villas"]:nth-child(n) a[class^="villas"]:visited::before {
+  transform: translate(-50%, -50%) rotate(45deg);/*COLOR DIAGONAL*/
+}
+div[class^="villas"]:nth-child(2n) a[class^="villas"]:link::before,
+div[class^="villas"]:nth-child(2n) a[class^="villas"]:visited::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+div[class^="villas"] a[class^="villas"]:hover::before,
+div[class^="villas"] a[class^="villas"]:active::before {
+  height: 400%;
+}
+/*GRADIENTES Y FOTOS DE FONDO VILLAS*/
+.villas__villa-1 {
+  background: linear-gradient(
+      var(--color-primary-m-light),
+      var(--color-tertiary-m-light)
+    ),
+    url("img/Villas/villa-1.jpg");
+}
+
+.villas__villa-2 {
+  background: linear-gradient(
+      var(--color-primary-m-light),
+      var(--color-tertiary-m-light)
+    ),
+    url("img/Villas/villa-2.jpg");
+}
+
+.villas__villa-3 {
+  background: linear-gradient(
+      var(--color-primary-m-light),
+      var(--color-tertiary-m-light)
+    ),
+    url("img/Villas/villa-3.jpg");
+}
+
+.villas__villa-4 {
+  background: linear-gradient(
+      var(--color-primary-m-light),
+      var(--color-tertiary-m-light)
+    ),
+    url("img/Villas/villa-4.jpg");
+}
+
+.villas__villa-5 {
+  background: linear-gradient(
+      var(--color-primary-m-light),
+      var(--color-tertiary-m-light)
+    ),
+    url("img/Villas/villa-5.jpg");
+}
+
+.villas__villa-6 {
+  background: linear-gradient(
+      var(--color-primary-m-light),
+      var(--color-tertiary-m-light)
+    ),
+    url("img/Villas/villa-6.jpg");
+}
+
+
+
+
+/* SECCION DE PUBLICIDAD*/
+section#motto {
+  background-color: var(--color-primary);
+  grid-column: container-start / container-end;
+
+  padding: 10vh 3vw;
+}
+/*CONTENIDO*/
+.motto__content {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+/*TITTULO*/
+.motto__content--title {
+  font-size: var(--font-size-title);/*PONEMOS FUENTE DEL TITULO*/
+  padding: 0 2rem 1rem;
+  font-weight: 300;
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.motto__content--title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 45%;
+  height: 0.2rem;
+  width: 10%;
+  background-color: white;
+}
+
+
+
+
+
+/*SECCION EVENTOS CONTENIDO*/
+section#events-content,
+section#features-content {
+  grid-column: container-start / col-end 9;/*COL*/
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-columns: repeat(2, 1fr);/*COL*/
+}
+section#events-content > div,
+section#features-content > div {
+  padding: var(--padding-section);/*PADDING PREDISEÑADO*/
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+
+  grid-template-areas:
+    "title"
+    "para";
+  grid-row-gap: 4vh;/*ESPACIADO*/
+  align-items: center;
+  justify-items: start;
+}
+
+section#events-content > div h2[class*="title"],/*CLASES QUE INCLUYEN TITLE(AREAS TITLE)*/
+section#features-content > div h2[class*="title"] {
+  grid-area: title;
+  font-size: var(--font-size-title);/*PONEMOS FUENTE DEL TITULO*/
+  font-weight: 400;
+  color: white;
+}
+section#events-content > div h2[class*="para"],/*CLASES QUE INCLUYEN PARA(AREAS PARA)*/
+section#features-content > div h2[class*="para"] {
+  grid-area: para;
+  color: white;
+  font-weight: 500;
+}
+section#events-content > div:first-child {
+  background: linear-gradient(/*GRADIENTE FILTRO SALMÓN*/
+      var(--color-tertiary-m-light),
+      var(--color-tertiary-m-light)
+    ),
+    url("img/Events/beach-party.jpg");/*FOTO PRIMER EVENTO*/
+  border-right: solid 0.2rem var(--color-tertiary);/*BORDE SALMÓN DERECHA*/
+}
+section#events-content > div:last-child {
+  background: linear-gradient(/*GRADIENTE FILTRO SALMÓN*/
+      var(--color-tertiary-m-light),
+      var(--color-tertiary-m-light)
+    ),
+    url("img/Events/culture-discovery.jpg");/*FOTO SEGUNDO EVENTO*/
+
+  border-left: solid 0.2rem var(--color-tertiary);/*BORDE SALMÓN IZQUIERDA*/
+}
+
+/*COVERTURA DE LAS IMAGENES, SE VEN MEJOR*/
+section#events-content > div:first-child,
+section#events-content > div:last-child {
+  background-size: cover;
+  background-position: center;
+}
+/* TEXTO DE EVENTOS*/
+section#events-text,
+section#features-text {
+  background-color: var(--color-tertiary);/*SALMON*/
+  grid-column: col-start 10 / center-end;
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-columns: 1fr;/*COL*/
+  grid-template-rows: 1fr;/*FILAS*/
+  place-items: center;
+}
+/*GIRAR LOS TITULOS DE TEXT Y FEATURES 90GRADOS A LA DERECHA*/
+.events-text__content,
+.features-text__content {
+  transform: rotate(0.25turn); /*90*/
+}
+/*TITULOS LATERALES(GALERIA, EVENTS, FEATURES)*/
+.events-text__content--title,
+.gallery-text__content--title,
+.features-text__content--title {
+  font-size: var(--font-size-title);/*PONEMOS FUENTE DEL TITULO*/
+  font-weight: 500;
+  color: white;
+  letter-spacing: 0.2rem;
+}
+
+
+
+
+
+/*SECCION GALERIA TEXTO*/
+section#gallery-text {
+  background-color: var(--color-primary);/*BURDEOS*/
+  grid-column: center-start / col-end 1;
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-columns: 1fr;/*COL*/
+  grid-template-rows: 1fr;/*FILAS*/
+  place-items: center;
+}
+/*GIRAR TITULO GALERIA 90 GRADOS A LA IZQUIERDA*/
+.gallery-text__content {
+  transform: rotate(-0.25turn);
+}
+/* CARRUSEL GALERIA*/
+section#gallery-carousel {
+  grid-column: col-start 2 / container-end;
+  height: 90vh;
+  overflow: hidden;
+  border: solid 0.2rem var(--color-secondary);
+  position: relative;
+}
+.gallery-carousel__img-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+/*CARRUSEL ELEMENTOS IAMGENES*/
+.gallery-carousel__img-container--list {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  transition: transform var(--transition-duration) ease-in-out;
+}
+.gallery-carousel__img-container--list__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.gallery-carousel__img-container--list__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/*BOTONES*/
+/*PARA ESCONDER BOTONES UNA VEZ SE ACABAN LAS IMAGENES DE ESE LADO, SE NECESITA JS*/
+.gallery-carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 1;
+}
+/*QUITAR ESPACIO A LA DERECHA DEL BOTON DERECHO*/
+.gallery-carousel__btn--right {
+  right: 0;
+}
+/*CIRCULITOS CARRUSEL*/
+.gallery-carousel__nav {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);/*TRANSFORMACION*/
+  margin-bottom: 1rem;
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 3rem;
+  height: 5%;
+}
+/*BOTON FORMA COLOR*/
+.gallery-carousel__nav--btn {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background-color: var(--color-secondary);/*AMARILLO*/
+  border: none;
+  cursor: pointer;
+}
+/*SE NECESITA JS PARA DESLIZAR IMAGENES*/
+ .current-img {
+  background-color: var(--color-primary);/*CUANDO ESTAMOS SITUADOS EN LA IMAGEN ACTUAL, FONDO DEL CIRCULITO CAMBIA A BURDEOS*/
+} 
+.hidden {
+  display: none;
+}
+
+
+/*SECCION FEATURES*/
+section#features-content > div:first-child {
+  background: linear-gradient(
+      var(--color-secondary-m-light),/*GRADIENTE AMARILLO*/
+      var(--color-secondary-m-light)
+    ),
+    url("img/Features/cocktail.jpg");/*IMAGEN FONDO*/
+  border-right: solid 0.2rem var(--color-secondary);/*BORDE DERECHO AMARILLO*/
+}
+section#features-content > div:last-child {
+  background: linear-gradient(
+      var(--color-secondary-m-light),/*GRADIENTE AMARILLO*/
+      var(--color-secondary-m-light)
+    ),
+    url("img/Features/surfing.jpg");/*IMAGEN FONDO*/
+  border-left: solid 0.2rem var(--color-secondary);/*BORDE IZQUIERDO AMARILLO*/
+}
+
+/*COBERTURA DE LA IMAGEN, MEJOR VISIBILIDAD/*/
+section#features-content > div:first-child,
+section#features-content > div:last-child {
+  background-size: cover;
+  background-position: left;
+}
+/* SECCION FEATURES TEXTO AMARILLO */
+section#features-text {
+  background-color: var(--color-secondary);
+}
+
+
+
+
+
+/*SECCION TESTIMONIALS*/
+section#testimonials {
+  grid-column: center-start / center-end;
+  padding: var(--padding-section);/*PADDING PREDISEÑADO*/
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-columns: repeat(auto-fit, 28rem);
+  grid-gap: 5rem;
+  place-content: center;
+}
+/* CARTA TESTIMONIALS GIRATORIA*/
+.testimonials__card {
+  width: 28rem;
+  height: 50rem;
+  position: relative;
+}
+.testimonials__card--front,
+.testimonials__card--back {
+  /*COBERTURA Y REPETICION DE LA IMAGEN, MEJOR VISIBILIDAD/*/
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 1s ease-in-out;/*TRANSICION GIRO*/
+  backface-visibility: hidden;
+  transform: perspective(100rem);/*GIRO*/
+
+  display: grid;
+  justify-items: center;
+  align-items: start;
+  padding: 3rem;
+}
+.testimonials__card--front h2 {
+  background-color: var(--color-secondary-m-light);/*AMARILLO*/
+  padding: 1rem;
+  border-bottom-right-radius: 15%;/*RADIO BORDE*/
+  border-bottom-left-radius: 15%;
+}
+.testimonials__card--back p {
+  place-self: center;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+
+
+/* SECCION FOOTER */
+footer#footer {
+  background-color: var(--color-primary);/*BURDEOS FONDO*/
+  grid-column: container-start / container-end;
+  padding: 6vh 4vw;
+
+  display: grid;/*DECLARAMOS CONETENEDOR GRID*/
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+}
+/*AQUI SE INDICA COMO HACER EL EFECTO CON LOS ICONOS DE LAS RRSS*/
+.footer__social--link:link,
+.footer__social--link:visited {
+  display: inline-block;
+  background-color: var(--color-secondary);
+  border-radius: 4rem;
+  margin-right: 1rem;
+  box-shadow: 0.5rem 0.5rem 2rem 0.5rem var(--color-secondary-m-light),/*SOMBRA TRASERA*/
+    -0.5rem -0.5rem 2rem 0.5rem var(--color-secondary-m-light);
+  transform: scale(0.8);
+  animation: social 3s linear infinite;/*CRECEN EN BUCLE DE UNO EN UNO*/
+}
+.footer__social--link i {
+  font-size: 2rem;
+  color: var(--color-primary);
+}
+
+@keyframes social {/*AQUI SE APLICA CUANTO CRECEN Y LA OPACIDAD DE LOS MISMOS*/
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 0d;
+  }
+}
+/*EL DELAY DE LA ANIMACION PARA QEU SE VEA DE FORMA ESCALADA*/
+.footer__social--link:link:nth-child(1),
+.footer__social--link:visited:nth-child(1) {
+  animation-delay: 0s;
+}
+.footer__social--link:link:nth-child(2),
+.footer__social--link:visited:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.footer__social--link:link:nth-child(3),
+.footer__social--link:visited:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.footer__social--link:link:nth-child(4),
+.footer__social--link:visited:nth-child(4) {
+  animation-delay: 0.9s;
+}
+
+
+
+
+
+/*TESTIMONIALS FOTO FONDO*/
+.testimonials__card:first-child .testimonials__card--front {
+  background-image: url("img/Testimonials/testimonials-1.jpg");/*1ª*/
+}
+.testimonials__card:nth-child(2) .testimonials__card--front {
+  background-image: url("img/Testimonials/testimonials-2.jpg");/*2ª*/
+}
+.testimonials__card:nth-child(3) .testimonials__card--front {
+  background-image: url("img/Testimonials/testimonials-3.jpg");/*3ª*/
+}
+.testimonials__card:nth-child(4) .testimonials__card--front {
+  background-image: url("img/Testimonials/testimonials-4.jpg");/*4ª*/
+}
+.testimonials__card:nth-child(5) .testimonials__card--front {
+  background-image: url("img/Testimonials/testimonials-5.jpg");/*5ª*/
+}
+.testimonials__card:nth-child(6) .testimonials__card--front {
+  background-image: url("img/Testimonials/testimonials-6.jpg");/*6ª*/
+}
+.testimonials__card--back {
+  transform: perspective(100rem) rotateY(0.5turn);/*ROTACION*/
+  background-color: var(--color-secondary);/*AMARILLO*/
+}
+.testimonials__card:hover .testimonials__card--front {
+  transform: perspective(100rem) rotateY(0.5turn);/*ROTACION*/
+}
+.testimonials__card:hover .testimonials__card--back {
+  transform: perspective(100rem) rotateY(1turn);/*ROTACION*/
+}
+
+
+
+
+
+
+/*          DISEÑO DESKTOP            */
+
+/*PUNTO DE RUPTURA A LOS 800PX-------*/
+@media screen and (max-width: 800px) {
+
+  /* SECCION BOOKIN CONTENIDO */
+  section#booking-content {
+    padding: 4vh 3vw;
+    grid-column: center-start / center-end;
+  }
+  /*TITULO DE BOOKING ALIANEADO*/
+  .booking-content__title {
+    text-align: center;
+  }
+  .booking-content__title::after {
+    width: 20%;
+    left: 40%;
+  }
+  /*FECHA BOOKING  ESPACIADO Y AREA DE LAS COLUMNAS*/
+  section#booking-date {
+    padding: 4vh 3vw;
+    grid-column: center-start / center-end;
+    grid-row-gap: 7vw;
+  }
+  /*BOOKING CALENDARIO*/
+  .booking-date__schedule--arrival > div,
+  .booking-date__schedule--departure > div,
+  .booking-date__schedule--guests > div {
+    padding: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: min-content;
+    grid-column-gap: 2vw;
+    place-items: center;
+  }
+  /* SECCION VILLAS ESPACIADO FILAS Y COLUMNAS A 0 */
+  section#villas {
+    grid-gap: 0;
+  }
+  /* FOOTER COLUMNAS Y FILAS PARA RRSS Y DERECHOS RESERVADOS*/
+  footer#footer {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 3rem;
+  }
+}
+
+
+
+
+
+
+/*PUNTO DE RUPTURA A 600PX------*/
+@media screen and (max-width: 600px) {
+  /* SECCION HEADER */
+  .header__logo__content--content__para {
+    font-size: 2rem;
+  }
+  /* SECCION COOKING TAMAÑO DE LETRA DEL CONTENIDO*/
+  .booking-content--para {
+    font-size: 1.5rem;
+  }
+  /* SECCION BOOKING FECHAS */
+  section#booking-date {
+    grid-template-rows: repeat(2, max-content);
+  }
+  /*BOOKING CALENDARIO*/
+  .booking-date__schedule--arrival > div,
+  .booking-date__schedule--departure > div,
+  .booking-date__schedule--guests > div {
+    padding: 4rem;
+    grid-template-columns: min-content;
+  }
+  /* SECCION VILLAS*/
+  div[class^="villas"] p[class^="villas"] {
+    margin: 1.5rem 0 4rem 0;
+  }
+  /*SECCION EVENTOS*/
+  section#events-content,
+  section#gallery-carousel,
+  section#features-content {
+    grid-column: center-start / center-end;
+  }
+  /*EVENTOS CONTENIDO*/
+  section#events-content,
+  section#features-content {
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  }
+  /*EVENTOS TEXTO*/
+  section#events-text,
+  section#gallery-text,
+  section#features-text {
+    display: none;
+  }
+  /*EVENTOS QUITAR BORDE DE LOS ELEMENTOS*/
+  section#events-content > div:first-child,
+  section#events-content > div:last-child,
+  section#features-content > div:first-child,
+  section#features-content > div:last-child {
+    border: none;
+  }
+  .booking-content__para,
+  div[class^="villas"] p[class^="villas"],
+  .motto__content--para,
+  section#events-content > div p[class*="para"],
+  section#features-content > div p[class*="para"],
+  footer#footer p {
+    font-size: 1.5rem;
+  }
+  /*SECCION GALERIA TAMAÑO BOTONES*/
+  .gallery-carousel__btn i {
+    font-size: 5rem;
+  }
+  /*SECCION GALERIA COLUMNAS Y FILAS CIRCULITOS DE NAVEGACION*/
+  .gallery-carousel__nav {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 3vh;
+    grid-column-gap: 10vw;
+    height: 12%;
+  }
+  /*FOOTER PADDING*/
+  footer#footer {
+    padding: 4vh 2vw;
+  }
+}
+
+
+
+
+
+
+/*PUNTO DE RUPRURA A 400PX------*/
+@media screen and (max-width: 400px) {
+  .booking-date__schedule {
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, 1fr);
+    grid-row-gap: 4vh;
+  }
+  /*SECCION BOOKING APARTADO DE CONTACTO ALINEADO*/
+  .booking-date__contact {
+    justify-self: center;
+    padding: 0 2rem;
+  }
+  /* SECCION VILLAS */
+  section#villas {
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  }
+}
